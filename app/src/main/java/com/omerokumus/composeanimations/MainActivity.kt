@@ -204,6 +204,9 @@ class MainActivity : ComponentActivity() {
                                 AnimationScreen.SHADER_HERO -> {
                                     ShaderHeroView()
                                 }
+                                AnimationScreen.ANOMALOUS_MATTER -> {
+                                    AnomalousMatterView()
+                                }
                                 else -> {
                                     AnimationPlaceholderScreen(key.type.label) {
                                         backstack.removeAt(backstack.lastIndex)
