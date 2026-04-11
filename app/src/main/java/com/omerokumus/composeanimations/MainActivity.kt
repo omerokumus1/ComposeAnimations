@@ -110,6 +110,19 @@ class MainActivity : ComponentActivity() {
                                         )
                                     }
                                 }
+                                AnimationScreen.FIRE -> {
+                                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                                        FireView()
+                                        Text(
+                                            text = "Fire",
+                                            style = MaterialTheme.typography.displayLarge.copy(
+                                                fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold,
+                                                letterSpacing = (-2).sp
+                                            ),
+                                            color = androidx.compose.ui.graphics.Color.White
+                                        )
+                                    }
+                                }
                                 else -> {
                                     AnimationPlaceholderScreen(key.type.label) {
                                         backstack.removeAt(backstack.lastIndex)
