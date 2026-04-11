@@ -84,6 +84,19 @@ class MainActivity : ComponentActivity() {
                                         )
                                     }
                                 }
+                                AnimationScreen.STARFIELD -> {
+                                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                                        StarfieldView()
+                                        Text(
+                                            text = "Starfield",
+                                            style = MaterialTheme.typography.displayLarge.copy(
+                                                fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold,
+                                                letterSpacing = (-2).sp
+                                            ),
+                                            color = androidx.compose.ui.graphics.Color.White
+                                        )
+                                    }
+                                }
                                 else -> {
                                     AnimationPlaceholderScreen(key.type.label) {
                                         backstack.removeAt(backstack.lastIndex)
@@ -91,6 +104,7 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
                         }
+
 
                         entry<Screen.AnimationTwo> { key ->
                             AnimationPlaceholderScreen(key.type.label) {
