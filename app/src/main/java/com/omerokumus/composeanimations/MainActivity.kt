@@ -14,6 +14,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.sp
 import androidx.navigation3.runtime.NavKey
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.entryProvider
@@ -56,8 +57,22 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         entry<Screen.Animation> { key ->
-                            AnimationPlaceholderScreen(key.type.label) {
-                                backstack.removeAt(backstack.lastIndex)
+                            if (key.type == AnimationScreen.SHADER_ANIMATION) {
+                                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                                    ShaderAnimationView()
+                                    Text(
+                                        text = "Shader Animation",
+                                        style = MaterialTheme.typography.displayLarge.copy(
+                                            fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold,
+                                            letterSpacing = (-2).sp
+                                        ),
+                                        color = androidx.compose.ui.graphics.Color.White
+                                    )
+                                }
+                            } else {
+                                AnimationPlaceholderScreen(key.type.label) {
+                                    backstack.removeAt(backstack.lastIndex)
+                                }
                             }
                         }
                         entry<Screen.AnimationTwo> { key ->
