@@ -57,24 +57,41 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         entry<Screen.Animation> { key ->
-                            if (key.type == AnimationScreen.SHADER_ANIMATION) {
-                                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                                    ShaderAnimationView()
-                                    Text(
-                                        text = "Shader Animation",
-                                        style = MaterialTheme.typography.displayLarge.copy(
-                                            fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold,
-                                            letterSpacing = (-2).sp
-                                        ),
-                                        color = androidx.compose.ui.graphics.Color.White
-                                    )
+                            when (key.type) {
+                                AnimationScreen.SHADER_ANIMATION -> {
+                                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                                        ShaderAnimationView()
+                                        Text(
+                                            text = "Shader Animation",
+                                            style = MaterialTheme.typography.displayLarge.copy(
+                                                fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold,
+                                                letterSpacing = (-2).sp
+                                            ),
+                                            color = androidx.compose.ui.graphics.Color.White
+                                        )
+                                    }
                                 }
-                            } else {
-                                AnimationPlaceholderScreen(key.type.label) {
-                                    backstack.removeAt(backstack.lastIndex)
+                                AnimationScreen.PLASMA_WAVES -> {
+                                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                                        PlasmaWavesView()
+                                        Text(
+                                            text = "Plasma Waves",
+                                            style = MaterialTheme.typography.displayLarge.copy(
+                                                fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold,
+                                                letterSpacing = (-2).sp
+                                            ),
+                                            color = androidx.compose.ui.graphics.Color.White
+                                        )
+                                    }
+                                }
+                                else -> {
+                                    AnimationPlaceholderScreen(key.type.label) {
+                                        backstack.removeAt(backstack.lastIndex)
+                                    }
                                 }
                             }
                         }
+
                         entry<Screen.AnimationTwo> { key ->
                             AnimationPlaceholderScreen(key.type.label) {
                                 backstack.removeAt(backstack.lastIndex)
