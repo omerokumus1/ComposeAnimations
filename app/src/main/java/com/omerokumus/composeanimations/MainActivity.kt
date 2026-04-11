@@ -162,6 +162,19 @@ class MainActivity : ComponentActivity() {
                                         )
                                     }
                                 }
+                                AnimationScreen.TUNNEL -> {
+                                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                                        TunnelView()
+                                        Text(
+                                            text = "Tunnel",
+                                            style = MaterialTheme.typography.displayLarge.copy(
+                                                fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold,
+                                                letterSpacing = (-2).sp
+                                            ),
+                                            color = androidx.compose.ui.graphics.Color.White
+                                        )
+                                    }
+                                }
                                 else -> {
                                     AnimationPlaceholderScreen(key.type.label) {
                                         backstack.removeAt(backstack.lastIndex)
