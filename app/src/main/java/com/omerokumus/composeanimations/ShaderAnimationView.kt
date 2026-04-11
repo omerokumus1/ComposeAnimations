@@ -2,20 +2,16 @@ package com.omerokumus.composeanimations
 
 import android.graphics.RuntimeShader
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithCache
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ShaderBrush
 import androidx.compose.ui.unit.dp
 
@@ -25,8 +21,8 @@ import androidx.compose.ui.unit.dp
  * This shader creates a dynamic, multi-layered line/ring effect using nested loops.
  * 
  * Uniforms:
- * iResolution The dimensions of the drawing area (width, height).
- * iTime The elapsed time in seconds, used to drive the animation.
+ * @param iResolution The dimensions of the drawing area (width, height).
+ * @param iTime The elapsed time in seconds, used to drive the animation.
  */
 private const val SHADER_SRC = """
     uniform float2 iResolution;
@@ -70,37 +66,6 @@ private const val SHADER_SRC = """
         return half4(col, 1.0);
     }
 """
-
-@Composable
-fun FpsCounter(modifier: Modifier = Modifier) {
-    var fps by remember { mutableIntStateOf(0) }
-    var frameCount by remember { mutableIntStateOf(0) }
-    var prevTime by remember { mutableLongStateOf(System.nanoTime()) }
-
-    LaunchedEffect(Unit) {
-        while (true) {
-            withFrameNanos { frameTime ->
-                frameCount++
-                val elapsed = frameTime - prevTime
-                if (elapsed >= 1_000_000_000L) {
-                    fps = frameCount
-                    Log.d("ShaderPerformance", "Current FPS: $fps")
-                    frameCount = 0
-                    prevTime = frameTime
-                }
-            }
-        }
-    }
-
-    Text(
-        text = "FPS: $fps",
-        color = Color.Green,
-        style = MaterialTheme.typography.labelSmall,
-        modifier = modifier
-            .background(Color.Black.copy(alpha = 0.6f))
-            .padding(horizontal = 8.dp, vertical = 4.dp)
-    )
-}
 
 /**
  * Performance Considerations for Shader Animations in Compose:
@@ -177,6 +142,9 @@ private fun ShaderAnimationContent(modifier: Modifier = Modifier) {
                 }
             }
     ) {
-        FpsCounter(Modifier.align(Alignment.TopEnd).padding(16.dp).padding(top = 32.dp))
+        FpsCounter(Modifier
+            .align(Alignment.TopEnd)
+            .padding(16.dp)
+            .padding(top = 32.dp))
     }
 }
