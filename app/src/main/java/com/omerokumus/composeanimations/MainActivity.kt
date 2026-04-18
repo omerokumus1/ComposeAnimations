@@ -335,6 +335,19 @@ class MainActivity : ComponentActivity() {
                                         )
                                     }
                                 }
+                                AnimationScreenTwo.PLASMA_GLOBE -> {
+                                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                                        PlasmaGlobeView()
+                                        Text(
+                                            text = "Plasma Globe",
+                                            style = MaterialTheme.typography.displayLarge.copy(
+                                                fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold,
+                                                letterSpacing = (-2).sp
+                                            ),
+                                            color = androidx.compose.ui.graphics.Color.White
+                                        )
+                                    }
+                                }
                                 else -> {
                                     AnimationPlaceholderScreen(key.type.label) {
                                         backstack.removeAt(backstack.lastIndex)
